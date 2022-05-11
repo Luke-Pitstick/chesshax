@@ -86,42 +86,46 @@ def move_piece(uni, coordinates):
     to_cord = coordinates[uni[2:].upper()]
     pg.click(x=to_cord[0], y=to_cord[1])
 
-engine = chess.engine.SimpleEngine.popen_uci(
-    r"C:\Users\lukep\Downloads\stockfish_14.1_win_x64_avx2\stockfish_14.1_win_x64_avx2\stockfish_14.1_win_x64_avx2.exe")
 
-board = chess.Board()
+def main():
+    engine = chess.engine.SimpleEngine.popen_uci(
+        r"C:\Users\lukep\Downloads\stockfish_14.1_win_x64_avx2\stockfish_14.1_win_x64_avx2\stockfish_14.1_win_x64_avx2.exe")
 
-color = ''
-while color != 'black' or color != 'white':
-    color = input("Are You Black or White? ").lower()
-    if color == 'white':
-        break
-    elif color == 'black':
-        break
+    board = chess.Board()
 
-if color == 'black':
-    board = chess.Board(fen=chess.STARTING_FEN)
-    prev_fen = chess.STARTING_FEN
-    while not board.is_game_over():
+    color = ''
+    while color != 'black' or color != 'white':
+        color = input("Are You Black or White? ").lower()
+        if color == 'white':
+            break
+        elif color == 'black':
+            break
 
-        fen = get_fen()
+    if color == 'black':
+        board = chess.Board(fen=chess.STARTING_FEN)
+        prev_fen = chess.STARTING_FEN
+        while not board.is_game_over():
 
-        if fen != prev_fen:
-            board = chess.Board(fen=fen)
-            print(board)
+            fen = get_fen()
 
-            result = engine.play(board, chess.engine.Limit(time=0.1))
-            move = result.move
-            print(str(move))
-            move_piece(str(move), cords)
-            board.push(move)
-            print(board)
+            if fen != prev_fen:
+                board = chess.Board(fen=fen)
+                print(board)
 
-            print(board.legal_moves)
-        else:
-            pass
-        prev_fen = fen
+                result = engine.play(board, chess.engine.Limit(time=0.1))
+                move = result.move
+                print(str(move))
+                move_piece(str(move), cords)
+                board.push(move)
+                print(board)
+
+                print(board.legal_moves)
+            else:
+                pass
+            prev_fen = fen
 
 
-elif color == 'white':
-    pass
+    elif color == 'white':
+        pass
+
+main()
