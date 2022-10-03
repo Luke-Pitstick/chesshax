@@ -88,8 +88,8 @@ def move_piece(uni, coordinates):
 
 
 def main():
-    engine = chess.engine.SimpleEngine.popen_uci(
-        r"C:\Users\lukep\Downloads\stockfish_14.1_win_x64_avx2\stockfish_14.1_win_x64_avx2\stockfish_14.1_win_x64_avx2.exe")
+    engine_path = input("Stockfish Path: ")
+    engine = chess.engine.SimpleEngine.popen_uci(engine_path)
 
     board = chess.Board()
 
