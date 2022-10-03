@@ -1,5 +1,5 @@
 import pyperclip
-from squares import cords_black
+from squares import cords_black as cords
 import pyautogui as pg
 import chess
 import chess.engine
@@ -8,10 +8,13 @@ import time
 
 pg.FAILSAFE = True
 
+def count_down(num):
+    for i in range(num, 0, -1):
+        print(i)
+        time.sleep(1)
 
 def black_cords():
-    time.sleep(4)
-    cords = cords_black
+    count_down(10)
     try:
         a1 = pg.locateCenterOnScreen('images/wbR2.png')
     except TypeError:
